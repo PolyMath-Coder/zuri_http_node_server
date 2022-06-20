@@ -13,8 +13,10 @@ const app = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(indexPage);
   } else if (urlPath === '/home') {
-    res.writeHead(201, { Location: '/' });
-    res.end(indexPage);
+    res.writeHead(201, {
+      Location: 'http://' + req.headers['host'] + '/',
+    });
+    return res.end();
   } else if (urlPath === '/about') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(aboutPage);
